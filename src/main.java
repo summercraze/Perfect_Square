@@ -1,3 +1,6 @@
+/*
+ * This figure out the smallest integer to make a number as a perfect square
+ */
 import java.util.ArrayList;
 import java.util.Scanner;
 
