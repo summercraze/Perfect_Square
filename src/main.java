@@ -7,9 +7,10 @@ public class main
 	{
 		int value;
 		Scanner input  = new Scanner(System.in);
-		System.out.println("Enter an integer m : ");
+		System.out.print("Enter an integer m : ");
 		value = input.nextInt();
-		pefectSquare result = new pefectSquare(value);
+		perfectSquare result = new perfectSquare(value);
+//		pefectSquare result = new pefectSquare(value);
 		System.out.println("The smallest number n for m*n to be perfect square is:" + result.getSmallestN());
 		System.out.println("m * n is " + result.getPerfectSquare());
 	}

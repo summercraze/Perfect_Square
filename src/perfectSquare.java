@@ -1,21 +1,35 @@
 import java.util.ArrayList;
 
-public class pefectSquare
+public class perfectSquare 
 {
-	protected int number;
-	ArrayList<Integer>factor;
+	//parameter
+	private int number;
+	ArrayList<Integer>factor,sort;
 	private int divisor,result,index;
 
-	public pefectSquare()
+	//constructor
+	public perfectSquare()
 	{
 		number = 12;
 		factor = new ArrayList<>();
 	}
-	public pefectSquare(int num)
+	public perfectSquare(int num)
 	{
-		this.number = num;
+		number = num;
 		factor = new ArrayList<>();
 	}
+
+	//setter and getter for number
+	public void setNumber(int num)
+	{
+		number = num;
+	}
+	public int getNumber()
+	{
+		return this.number;
+	}
+
+	//helper method to figure out which divisor to return
 	private int findDivisor(int num)
 	{
 		if(num%2 == 0)
@@ -35,6 +49,8 @@ public class pefectSquare
 			return 7;
 		}
 	}
+
+	//this factor out all the number and put them in a list
 	private ArrayList<Integer> factorList(int num)
 	{
 		while (num != 1)
@@ -43,54 +59,46 @@ public class pefectSquare
 			num = num / divisor;
 			this.factor.add(divisor);
 		}
-
 		return this.factor;
 	}
+
+	//this sort out all the factor
 	private ArrayList<Integer> sortFactor()
 	{
+		//put all factor in a list and sort it from max to min
 		this.factor = this.factorList(this.number);
 		java.util.Collections.sort(this.factor);
-		
+
+		//this figure out which number show out even time and remove the number
+		sort = new ArrayList<>();
 		for(int i = 0;i < this.factor.size();i++)
 		{
 			index = this.factor.lastIndexOf(this.factor.get(i));;
-			if((i - index)%2 != 0)
+			if((index - i)%2 == 0 && !sort.contains(this.factor.get(i)))
 			{
-				for (int j = i;j < index;j++)
-				{
-					this.factor.remove(j);
-				}
+				//put it in sort arrayList
+				sort.add(this.factor.get(i));
 			}
-
+			i = index;
 		}
-		return this.factor;
+		return this.sort;
 	}
-	private ArrayList<Integer> refineFactor( ArrayList<Integer> fact)
-	{
-		for(int i = 1;i < fact.size();i++)
-		{
-			if(fact.get(i) == fact.get(i-1))
-			{
-				fact.remove(i);
-			}
-		}
-		return fact;
-	} 
+
+	//return the smallest n
 	public int getSmallestN()
 	{
 		this.result = 1;
-		this.factor = this.refineFactor(this.sortFactor());
-		for(int i = 1;i < this.factor.size();i++)
+		this.factor = this.sortFactor();
+		for(int i = 0;i < this.factor.size();i++)
 		{
-
 			this.result = result *  this.factor.get(i);
-
 		}
 		return this.result;
 	}
+
+	//return m*n
 	public int getPerfectSquare()
 	{
 		return result*number;
 	}
-
 }
